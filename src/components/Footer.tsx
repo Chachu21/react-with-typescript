@@ -15,7 +15,7 @@ const Footer = () => {
     setCurrentYear(year);
   }, []);
   return (
-    <footer className="bg-[#314899] flex flex-col gap-32 mt-20 ">
+    <footer className="bg-[#314899] flex flex-col gap-32 mt-20 px-2 container mx-auto w-full md:px-0">
       <div className="flex justify-between items-center mx-[50px] text-white mt-10">
         <div className="flex  flex-col">
           <h2 className="capitalize text-2xl mb-2">Our Company</h2>

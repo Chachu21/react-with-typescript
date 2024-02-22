@@ -1,6 +1,10 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { images } from "../data"; // Ensure that this import is correct and that the data is exported correctly
 import { GoArrowRight } from "react-icons/go";
+import Button from "./UI/Button";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../redux/store";
+import { addToCart } from "../redux/features/cartSlice";
 
 interface FilteredProduct {
   id: string;
@@ -11,6 +15,7 @@ interface FilteredProduct {
 }
 
 const ProductDetails = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams<{ id: string }>(); // Ensure that you specify the type for useParams
   const filteredProduct: FilteredProduct | undefined = images.find(
     (image) => image.id === id
@@ -33,13 +38,22 @@ const ProductDetails = () => {
             Price: ${filteredProduct.price}
           </p>
           <p>{filteredProduct.description}</p>
-          <button
-            onClick={() => {}}
-            className="flex space-x-6 rounded-[18px] items-center py-5 px-3 w-fit bg-[#4243B1] text-white -mt-[102px]"
+          <Button
+            onClick={() => {
+              dispatch(
+                addToCart({
+                  id: filteredProduct.id,
+                  name: filteredProduct.name,
+                  url: filteredProduct.url,
+                  price: filteredProduct.price,
+                })
+              );
+            }}
+            className="-mt-[102px]"
           >
             {/* <GoArrowRight /> */}
             <span className="capitalize">ADD TO BAG</span>
-          </button>
+          </Button>
         </div>
       </div>
       <img
@@ -96,29 +110,29 @@ const ProductDetails = () => {
           <img
             src="https://s3-alpha-sig.figma.com/img/6f28/29ab/103a309acc394f64b068d2b344a2bc4e?Expires=1709510400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=JKyZ05FY89fgptcODJaM9XF5YocvWRS2GyzYUDhspDKfUSeNorkdkQeW7~5hWTtjL9UoPnT7ZdbTiUBqyuSaSX6K3gkAjolAertRYXJ~Xs1YlGLe8Epf9Vn41FysnDZPLKzDLufroz355fpTmtsBzqRf3Ge2vfWXu0-A-5tuiSzHZc0S3AgWp~sdlGESFn0T2w4N74Ww6D03NUe-K5KbcM1WRKcWkoBhgU2noHLfCoFSXihFTyezaaboU1Dine9-WIHJ2SSBkGzmIcXNlKKbBKWT04-dJ0YPZyzWyJ-4zXe43XyRqXY0klUQihjT44pCsX7juceLmLsrcfOl0~vhXQ__"
             alt="young bndofijd"
-            className="w-full object-cover"
+            className="w-full object-cover bg-white"
           />
-          <button
-            onClick={() => {}}
-            className="flex space-x-6 rounded-md items-center py-1 px-2 bg-[#4243B1] w-fit text-white  -mt-[102px]"
-          >
-            <GoArrowRight />
-            <span className="capitalize text-xl">Shop</span>
-          </button>
+          <Link to={"/shop"}>
+            {" "}
+            <Button type="button" onClick={() => {}} className="-mt-[102px]">
+              <GoArrowRight />
+              <span className="capitalize text-xl">Shop</span>
+            </Button>
+          </Link>
         </div>
         <div className="flex flex-1 flex-col  relative">
           <img
             src="https://s3-alpha-sig.figma.com/img/9217/7752/165dc1be8da6aa9dbc598c05ec4d0b9f?Expires=1709510400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=IezuW0MFYb0ah2mYyHt~WJNUGY8A8xriIqAB-I3w3F1Tcym7w0DUwn46Gy6EZqH1Jm3B5cY5UxMGQMEN~WJRwQDrpG95bFWzfAn20tzph06VkPkrjgJk1XzoNmkQCD8JGarJrrIWbdtXIZznY9N14cyo9cVFHSSy-5ByHe8~rhmp0Pa41MRBTcW0eUqRf8cCWoptLQ2t4bkiZSUbR~FLoyMlRdMCTCwMtdjl0VHLZ19JUoFDNqzQ5WdtFAXm5P9EwoWl9-xLWvy68I2IaXvAIxH0jdZLUnVBc7DIfdYHUnbOo1dVuDvBV2~tkIJxQiqYEsFqbx30FgkyRHBXrFm7Ng__"
             alt="young bndofijd"
-            className="w-full object-cover"
+            className="w-full object-contain bg-white"
           />
-          <button
-            onClick={() => {}}
-            className="flex space-x-6 rounded-md w-fit items-center py-1 px-2 bg-[#4243B1] text-white -mt-[102px]"
-          >
-            <GoArrowRight />
-            <span className="capitalize text-xl">Shop</span>
-          </button>
+          <Link to={"/shop"}>
+            {" "}
+            <Button type="button" onClick={() => {}} className="-mt-[102px]">
+              <GoArrowRight />
+              <span className="capitalize text-xl">Shop</span>
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
