@@ -69,7 +69,7 @@ const Cart = () => {
                 </div>
               </div>
             </div>
-            <span className="font-bold md:my-0 mb-10">
+            <span className="font-bold md:my-0 mb-10 pr-0 md:pr-10">
               ${item.price * item.quantity}
             </span>
           </div>
@@ -77,7 +77,9 @@ const Cart = () => {
       </div>
       <div className="flex justify-between items-center">
         <span className="font-bold ">Total costs</span>
-        <span className="font-bold ">USD ${gettotals.totalPrice}</span>
+        <span className="font-bold pr-0 md:pr-10 ">
+          USD ${gettotals.totalPrice}
+        </span>
       </div>
       <Link to={"/checkOut"}>
         <button
